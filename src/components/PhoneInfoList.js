@@ -4,14 +4,18 @@ import PhoneInfo from './PhoneInfo';
 class PhoneInfoList extends Component {
 
     static defaultProps = {
-        data: []
+        data: [],
+        onRemove: () => console.warn('onRemove is not defined'),
+        onUpdate: () => console.warn('onUpdate is not defined')
     }
 
-
+    /*
+        컴포넌트를 배열로 만들어서 rendering 한거네.
+    */
     render() {
 
-        const { data } = this.props.data;
-        const list = data.map(info => (<PhoneInfo key={info.id} info={info} />))
+        const { data, onRemove, onUpdate } = this.props;
+        const list = data.map(info => (<PhoneInfo key={info.id} info={info} onRemove={onRemove} onUpdate={onUpdate} />))
 
         return (
             <div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PhoneForm from './components/PhoneForm';
+import PhoneInfoList from './components/PhoneInfoList';
 
 class App extends Component {
 
@@ -30,6 +31,20 @@ class App extends Component {
     console.log(data)
   }
 
+  handleRemove = (id) => {
+    const { information } = this.state;
+    this.setState({
+      information: information.filter(info => info.id !== id)
+    })
+  }
+
+  handleUpdate = (id, data) => {
+    const { information } = this.state;
+    this.setState({
+      information: information.map(info => info.id === id ? { ...info, ...data } : info)
+    })
+  }
+
   render() {
 
     const { information } = this.state;
@@ -37,7 +52,7 @@ class App extends Component {
     return (
       <div>
         <PhoneForm onCreate={this.handleCreate} />
-        {JSON.stringify(information)}
+        <PhoneInfoList data={information} onRemove={this.handleRemove} onUpdate={this.handleUpdate} />
       </div>
     )
   }
