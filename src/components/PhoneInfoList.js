@@ -9,10 +9,15 @@ class PhoneInfoList extends Component {
         onUpdate: () => console.warn('onUpdate is not defined')
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.data !== this.props.data;
+    }
+
     /*
         컴포넌트를 배열로 만들어서 rendering 한거네.
     */
     render() {
+        console.log('PhoneListInfo was rendered');
 
         const { data, onRemove, onUpdate } = this.props;
         const list = data.map(info => (<PhoneInfo key={info.id} info={info} onRemove={onRemove} onUpdate={onUpdate} />))

@@ -56,7 +56,17 @@ class PhoneInfo extends Component {
         }
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (!this.state.editing && !nextState.editing && this.props.info === nextProps.info) {
+            return false;
+        }
+
+        return true;
+    }
+
     render() {
+        console.log('render PhoneInfo ' + this.props.info.id);
+
         const { editing } = this.state;
 
         const style = {
